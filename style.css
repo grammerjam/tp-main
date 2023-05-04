@@ -14,11 +14,17 @@
     flex-direction: row;
 }
 
+main{
+    min-height: 100vh;
+    margin-bottom: -100px;
+}
+
 @media screen and (max-width: 480px) {.row{
     display: flex;
     flex-direction: column;
     align-items: center;
 }}
-footer{
+footer,.push{
+    height: 100px;
     text-align: center;
 }
