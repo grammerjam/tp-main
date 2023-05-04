@@ -4,7 +4,7 @@ Team PERSEVERANCE - Main Repo
 ________________________________
 1st Project
 
-Under te-main/ create an index.html file.
+Under tp-main/ create an index.html file.
 
 Exercise: 
 
