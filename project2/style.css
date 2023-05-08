@@ -1,0 +1,78 @@
+header{
+    background-color: rgb(53,125,89);
+    color: white;
+    text-align: center;
+    position: absolute;
+    right: 0%;
+    left: 0%;
+    top: 0%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+nav{
+    padding-top: 80px;
+    display: flex;
+    color: white;
+    font-size: 16px;
+    justify-content: space-evenly;
+}
+
+.topSection{
+    background-color: rgb(255,140,112);
+}
+
+.nav-link{
+padding-left: 10px;
+left: 20px;
+}
+
+.shopButton{
+    background-color:rgb(53,125,89);
+    color:white;
+    border-radius: 10px;
+    margin-left: 30px;
+    margin-right: 55px;
+    margin-top: -19px;
+    margin-bottom: px;
+    justify-self: right;
+    display:inline;
+    width: 150px;
+    height: 60px;
+    font-size: 20px;
+    
+}
+
+.mainTitle{
+    text-align: center;
+    font-size: 100px;
+    padding: 0 auto;
+    margin: -40px auto;
+    font-family: Gabriola;
+
+}
+
+h2{
+    color:white;
+    font-size: 60px;
+    font-family: Gabriola;
+
+}
+
+.info{
+    padding-left: 10px;
+}
+
+p{
+font-size: 20px;
+}
+
+footer{
+    height: 100px;
+    text-align: center;
+    position: absolute;
+    right: 0%;
+    left: 0%;
+    bottom: 0%;
+}
+
