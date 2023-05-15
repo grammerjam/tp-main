@@ -22,7 +22,7 @@ ul {
   padding-top: 80px;
   list-style-type: none;
   display: flex;
-  color: white;
+  /* color: white; */
   font-size: 16px;
   justify-content: space-evenly;
   text-decoration: none;
@@ -46,10 +46,9 @@ ul {
   padding: 10px 20px;
 }
 
-nav ul li a {
+.nav-link {
   color: white;
   text-decoration: none;
-  font-weight: bold;
 }
 
 a {
@@ -102,6 +101,7 @@ button {
 }
 
 .mainTitle {
+  color: white;
   text-align: center;
   font-size: 80px;
   padding: 0 auto;
@@ -112,12 +112,7 @@ button {
 
 .secondTitle {
   font-size: 60px;
-}
-
-h2 {
   color: white;
-  font-size: 60px;
-  font-family: "Montserrat", sans-serif;
 }
 
 .info {
@@ -131,13 +126,33 @@ h2 {
   color: white;
   margin-top: 20px;
   margin-left: 3px;
+  width: 500px;
 }
 
 .buttonTwo {
   margin-top: 10px;
   margin-left: 0px;
 }
+.firstSection {
+  display: flex;
+}
+.rightImg {
+  width: 500px;
+  height: 500px;
+}
 
+.holdingDeoderant {
+  margin-left: 300px;
+}
+.wildyTitle {
+  text-align: center;
+}
+
+.icon-bar {
+  color: black !important;
+  /* background-color: black; */
+  margin-top: 50px;
+}
 footer {
   height: 100px;
   text-align: center;
@@ -145,4 +160,10 @@ footer {
   right: 0%;
   left: 0%;
   bottom: 0%;
+}
+
+@media (max-width: 800px) {
+  body {
+    grid-template-columns: 1fr;
+  }
 }
