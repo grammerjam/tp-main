@@ -28,6 +28,9 @@
             'front-card': "url('./images/bg-card-front.png')",
             'back-card': "url('./images/bg-card-back.png')",
           },
+          screens: {
+            'dt': '376px',
+          },
         }
       }
     }
@@ -46,12 +49,12 @@
 
 </head>
 <body>
-  <main class="pb-20">
+  <main class="dt:flex dt:w-[100vw] dt:h-[100vh] pb-20">
 
-    <header class="h-[30vh] bg-mobile-header ">
+    <header class="dt:h-[100vh] dt:w-1/3 h-[30vh] dt:bg-desktop-header dt:bg-cover bg-mobile-header ">
 
       <!-- FRONT CARD -->
-      <div class="front-card rounded-md bg-front-card bg-right-top absolute h-[10rem] w-[18rem] top-28 left-4 rounded-md z-10">
+      <div class="dt:top-[10rem] dt:left-[16rem] front-card rounded-md bg-front-card bg-right-top absolute h-[10rem] w-[18rem] top-28 left-4 rounded-md z-10">
         <!-- FRONT CARD INFO -->
         <div class="front-card-info py-3 px-4 text-white">
           
@@ -76,7 +79,7 @@
       </div>
 
       <!-- BACK CARD -->
-      <div class="back-card rounded-md bg-back-card bg-[cover] absolute h-[10rem] w-[18rem] top-5 left-16 rounded-md">
+      <div class="dt:top-[22rem] dt:left-[20rem] back-card rounded-md bg-back-card bg-[cover] absolute h-[10rem] w-[18rem] top-5 left-16 rounded-md">
         <div class="black-stripe"></div>
         <div class="gray-stripe">
           <div class="cvc text-white text-xs absolute top-[70px] left-[238px]">
@@ -88,8 +91,8 @@
     </header>
 
     <!-- FORM SECTION -->
-    <section class="h-[60vh] font-ff-space text-sm font-medium tracking-widest">
-      <form class="flex flex-col pt-[7rem] w-[90vw] m-auto" action="submit">
+    <section class="dt:w-2/3 dt:m-auto h-[60vh] font-ff-space text-sm font-medium tracking-widest">
+      <form class="max-w-[300px] flex flex-col pt-[7rem] w-[90vw] m-auto" action="submit">
 
         <label for="name block">CARDHOLDER NAME</label>
         <input class="border rounded h-10 mt-1" id="name" type="text">
@@ -105,7 +108,7 @@
         <div class="flex mt-1">
           <input class="border rounded h-10 w-16 mr-3" id="month" type="text">
           <input class="border rounded h-10 w-16 mr-3" id="year" type="text">
-          <input class="border rounded h-10 " id="cvc"type="text">
+          <input class="border rounded h-10 w-full" id="cvc"type="text">
         </div>
 
         <button class="h-10 bg-black text-white mt-8 rounded-md tracking-wide" type="submit">Confirm</button>
