@@ -2,13 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
 
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
   
-  <title>Project 3 -  Team Name</title>
+  <title>Project 3 -  Perseverance</title>
 
-  <link href="/dist/output.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+          },
+          fontFamily: {
+            'ff-space': '"Space Grotesk", "sans-serif"',
+          },
+          backgroundImage: {
+            'mobile-header': "url('./images/bg-main-mobile.png')",
+            'desktop-header': "url('./images/bg-main-desktop.png')",
+            'front-card': "url('./images/bg-card-front.png')",
+            'back-card': "url('./images/bg-card-back.png')",
+          },
+        }
+      }
+    }
+  </script>
   <!-- TODO -->
   <!-- 1. name variables that need to be targeted in JS
   2. research on change
@@ -23,25 +46,24 @@
 
 </head>
 <body>
-  <main class="">
-    
-    <header class="">
-      <h1 class="text-4xl font-bold underline text-green-600">
-        Hello world!
-      </h1>
-      
-      <div class="front-card"> 
-        
-        <div class="card-info">
-          <div class="card-logo">
-            <img src="./images/card-logo.svg" alt="Card Logo">
-          </div>
+  <main class="pb-20">
+
+    <header class="h-[30vh] bg-mobile-header ">
+
+      <!-- FRONT CARD -->
+      <div class="front-card rounded-md bg-front-card bg-right-top absolute h-[10rem] w-[18rem] top-28 left-4 rounded-md z-10">
+        <!-- FRONT CARD INFO -->
+        <div class="front-card-info py-3 px-4 text-white">
           
-          <div class="card-number">
+          <div class="card-logo">
+            <img class="h-7" src="./images/card-logo.svg" alt="Card Logo">
+          </div>
+
+          <div class="card-number font-normal tracking-[.13rem] text-xl pt-10 pl-2">
             <p>0000 0000 0000 0000</p>
           </div>
-  
-          <div class="card-name">
+
+          <div class="card-name flex justify-between max-w-[232px] text-[10px] pt-4 pl-2">
             <div class="card-holder">
               <p>JANE APPLESEED</p>
             </div>
@@ -53,10 +75,11 @@
         </div>
       </div>
 
-      <div class="back-card border">
+      <!-- BACK CARD -->
+      <div class="back-card rounded-md bg-back-card bg-[cover] absolute h-[10rem] w-[18rem] top-5 left-16 rounded-md">
         <div class="black-stripe"></div>
         <div class="gray-stripe">
-          <div class="cvc">
+          <div class="cvc text-white text-xs absolute top-[70px] left-[238px]">
             <p>000</p>
           </div>
         </div>
@@ -64,34 +87,39 @@
       </div>
     </header>
 
-      <section>
-        <form action="submit">
+    <!-- FORM SECTION -->
+    <section class="h-[60vh] font-ff-space text-sm font-medium tracking-widest">
+      <form class="flex flex-col pt-[7rem] w-[90vw] m-auto" action="submit">
 
-          <label for="name">CARDHOLDER NAME</label>
-          <input id="name" type="text">
+        <label for="name block">CARDHOLDER NAME</label>
+        <input class="border rounded h-10 mt-1" id="name" type="text">
 
-          <label for="card-number">CARD NUMBER</label>
-          <input id="card-number" type="text">
+        <label  class="pt-5" for="card-number">CARD NUMBER</label>
+        <input class="border rounded h-10 mt-1" id="card-number" type="text">
 
+        <div class="pt-5" >
           <label for="month year">EXP. DATE (MM/YY)</label>
-          <input id="month" type="text">
-          <input id="year" type="text">
-
           <label for="cvc"></label>
-          <input id="cvc"type="text">
+        </div>
 
-          <button type="submit">Confirm</button>
-        </form>
+        <div class="flex mt-1">
+          <input class="border rounded h-10 w-16 mr-3" id="month" type="text">
+          <input class="border rounded h-10 w-16 mr-3" id="year" type="text">
+          <input class="border rounded h-10 " id="cvc"type="text">
+        </div>
 
-        <!-- THANK YOU -->
-        <dialog class"hidden">
-          <img src="" alt="">
-          <h2>THANK YOU!</h2>
-          <p>We've added your card details</p>
-          <button>Continue</button>
-        </dialog>
+        <button class="h-10 bg-black text-white mt-8 rounded-md tracking-wide" type="submit">Confirm</button>
+      </form>
 
-      </section>
+      <!-- THANK YOU -->
+      <dialog class"hidden">
+        <img src="" alt="">
+        <h2>THANK YOU!</h2>
+        <p>We've added your card details</p>
+        <button class="h-10 bg-black text-white mt-8 rounded-md tracking-wide" >Continue</button>
+      </dialog>
+
+    </section>
   </main>
 
   <footer>
