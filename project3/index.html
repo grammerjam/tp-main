@@ -54,15 +54,15 @@
     <header class="dt:h-[100vh] dt:w-1/3 h-[30vh] dt:bg-desktop-header dt:bg-cover bg-mobile-header ">
 
       <!-- FRONT CARD -->
-      <div class="dt:top-[10rem] dt:left-[16rem] front-card rounded-md bg-front-card bg-right-top absolute h-[10rem] w-[18rem] top-28 left-4 rounded-md z-10">
+      <div class="dt:h-[12rem] dt:w-[20rem] dt:top-[8rem] dt:left-[16rem] front-card rounded-md bg-front-card bg-right-top absolute h-[10rem] w-[18rem] top-28 left-4 rounded-md z-10">
+
         <!-- FRONT CARD INFO -->
-        <div class="front-card-info py-3 px-4 text-white">
-          
+        <div class="dt:pt-4 py-3 px-4 text-white">
           <div class="card-logo">
             <img class="h-7" src="./images/card-logo.svg" alt="Card Logo">
           </div>
 
-          <div class="card-number font-normal tracking-[.13rem] text-xl pt-10 pl-2">
+          <div class="card-number  dt:pt-16 font-normal tracking-[.13rem] text-xl pt-10 pl-2">
             <p>0000 0000 0000 0000</p>
           </div>
 
@@ -79,10 +79,10 @@
       </div>
 
       <!-- BACK CARD -->
-      <div class="dt:top-[22rem] dt:left-[20rem] back-card rounded-md bg-back-card bg-[cover] absolute h-[10rem] w-[18rem] top-5 left-16 rounded-md">
+      <div class="dt:h-[12rem] dt:w-[20rem] dt:top-[22rem] dt:left-[20rem] dt:bg-[center] back-card rounded-md bg-back-card bg-[cover] absolute h-[10rem] w-[18rem] top-5 left-16 rounded-md">
         <div class="black-stripe"></div>
         <div class="gray-stripe">
-          <div class="cvc text-white text-xs absolute top-[70px] left-[238px]">
+          <div class="cvc dt:top-[85px] dt:left-[260px] text-white text-xs absolute top-[70px] left-[238px]">
             <p>000</p>
           </div>
         </div>
@@ -95,10 +95,10 @@
       <form class="max-w-[300px] flex flex-col pt-[7rem] w-[90vw] m-auto" action="submit">
 
         <label for="name block">CARDHOLDER NAME</label>
-        <input class="border rounded h-10 mt-1" id="name" type="text">
+        <input class="border rounded h-10 mt-1 pl-3 " id="name" type="text" placeholder="e.g Jane Appleseed">
 
         <label  class="pt-5" for="card-number">CARD NUMBER</label>
-        <input class="border rounded h-10 mt-1" id="card-number" type="text">
+        <input class="border rounded h-10 mt-1 pl-3" id="card-number" type="text" placeholder="e.g. 1234 5678 9123 0000">
 
         <div class="pt-5" >
           <label for="month year">EXP. DATE (MM/YY)</label>
@@ -106,9 +106,9 @@
         </div>
 
         <div class="flex mt-1">
-          <input class="border rounded h-10 w-16 mr-3" id="month" type="text">
-          <input class="border rounded h-10 w-16 mr-3" id="year" type="text">
-          <input class="border rounded h-10 w-full" id="cvc"type="text">
+          <input class="border rounded h-10 w-16 mr-3 pl-3" id="month" type="text" placeholder="MM">
+          <input class="border rounded h-10 w-16 mr-3 pl-3" id="year" type="text" placeholder="YY">
+          <input class="border rounded h-10 w-full pl-3" id="cvc"type="text" placeholder="e.g. 123">
         </div>
 
         <button class="h-10 bg-black text-white mt-8 rounded-md tracking-wide" type="submit">Confirm</button>
