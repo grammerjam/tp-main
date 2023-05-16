@@ -21,11 +21,6 @@ Use the following widths:
 - Dark grayish violet: hsl(279, 6%, 55%)
 - Very dark violet: hsl(278, 68%, 11%)
 
-            'input-active': 'hsl(249, 99%, 64%)',
-            'input-error': 'hsl(0, 100%, 66%)',
-            'light-gray': 'hsl(270, 3%, 87%)',
-            'dark-gray': 'hsl(279, 6%, 55%)',
-            'dark-violet': 'hsl(278, 68%, 11%)',
 
 ## Typography
 

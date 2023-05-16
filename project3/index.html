@@ -88,7 +88,7 @@
         <div class="black-stripe"></div>
         <div class="gray-stripe">
           <div class="card-cvc dt:top-[85px] dt:left-[260px] text-white text-xs absolute top-[70px] left-[238px]">
-            <p>000</p>
+            <p class="card-cvc">000</p>
           </div>
         </div>
         <div class="fine-print"></div>
@@ -104,7 +104,7 @@
         <input class="input-name border rounded h-10 mt-1 pl-3 focus:outline-input-active invalid:input-error required" id="name" type="text" placeholder="e.g Jane Appleseed" >
 
         <label  class="pt-5" for="card-number">CARD NUMBER</label>
-        <input class="input-number border rounded h-10 mt-1 pl-3 focus:outline-input-active invalid:input-error required" id="card-number" type="text" placeholder="e.g. 1234 5678 9123 0000" >
+        <input class="input-number border rounded h-10 mt-1 pl-3 focus:outline-input-active invalid:input-error required" id="card-number" type="text" placeholder="e.g. 1234 5678 9123 0000" minlength="15" maxlength="16">
 
         <div class="pt-5" >
           <label for="month year">EXP. DATE (MM/YY)</label>
@@ -112,14 +112,14 @@
         </div>
 
         <div class="flex mt-1">
-          <input class="input-month border rounded h-10 w-16 mr-3 pl-3  focus:outline-input-active invalid:input-error required" id="month" type="number" placeholder="MM">
+          <input class="input-month border rounded h-10 w-16 mr-3 pl-3  focus:outline-input-active invalid:input-error required" id="month" type="text" placeholder="MM">
 
-          <input class="input-year border rounded h-10 w-16 mr-3 pl-3 focus:outline-input-active invalid:input-error required" id="year" type="number" placeholder="YY">
+          <input class="input-year border rounded h-10 w-16 mr-3 pl-3 focus:outline-input-active invalid:input-error required" id="year" type="text" placeholder="YY">
 
-          <input class="input-cvc border rounded h-10 w-full pl-3 focus:outline-input-active invalid:input-error required" id="cvc"type="number" placeholder="e.g. 123">
+          <input class="input-cvc border rounded h-10 w-full pl-3 focus:outline-input-active invalid:input-error required" id="cvc"type="text" placeholder="e.g. 123">
         </div>
 
-        <button class="button-confirm h-10 bg-dark-violet text-white mt-8 rounded-md tracking-wide" type="submit">Confirm</button>
+        <button class="confirm-btn h-10 bg-dark-violet text-white mt-8 rounded-md tracking-wide" type="submit">Confirm</button>
       </form>
 
       <!-- THANK YOU -->
@@ -128,7 +128,7 @@
         <img class="h-18 w-18 self-center" src="./images/icon-complete.svg" alt="">
         <h2 class="text-3xl mt-4 font-[500]">THANK YOU!</h2>
         <p class="text-[1.1rem] font-medium text-dark-gray">We've added your card details</p>
-        <button class="button-continue h-12 bg-dark-violet text-white mt-8 rounded-md tracking-wide" >Continue</button>
+        <button class="continue-btn h-12 bg-dark-violet text-white mt-8 rounded-md tracking-wide" >Continue</button>
       </div>
 
     </section>
