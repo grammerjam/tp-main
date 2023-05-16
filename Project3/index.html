@@ -8,38 +8,94 @@
   
   <title>Project 3 -  Team Name</title>
 
-  <style>
+  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+  <!-- TODO -->
+  <!-- 1. name variables that need to be targeted in JS
+  2. research on change
+  3. change form to hidden on button submit and show dialog
+  4. add required to elements and style errors or alert with JS
+  5. mobile responsiveness 
+  6. add client-side form validation
+  7. deploy to Netlify
+  8. add nav
+  9. reset page on continue button click -->
 
-  </style>
+
 </head>
 <body>
 
-  0000 0000 0000 0000
-  Jane Appleseed
-  00/00
+  <main class="">
 
-  000
+    <header class="">
 
-  Cardholder Name
-  e.g. Jane Appleseed
+      <div class="front-card"> 
 
-  Card Number
-  e.g. 1234 5678 9123 0000
-
-  Exp. Date (MM/YY)
-  MM
-  YY
-
-  CVC
-  e.g. 123
-
-  Confirm
-
-  <!-- Completed state start -->
-
-  Thank you!
-  We've added your card details
-  Continue
+        <div class="card-info">
+          <div class="card-logo">
+            <img src="./images/card-logo.svg" alt="Card Logo">
+          </div>
   
+          <div class="card-number">
+            <p>0000 0000 0000 0000</p>
+          </div>
+  
+          <div class="card-name">
+            <div class="card-holder">
+              <p>JANE APPLESEED</p>
+            </div>
+  
+            <div class="card-expiration">
+              <p>00/00</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="back-card border">
+        <div class="black-stripe"></div>
+        <div class="gray-stripe">
+          <div class="cvc">
+            <p>000</p>
+          </div>
+        </div>
+        <div class="fine-print"></div>
+      </div>
+    </header>
+
+      <section>
+        <form action="submit">
+
+          <label for="name">CARDHOLDER NAME</label>
+          <input id="name" type="text">
+
+          <label for="card-number">CARD NUMBER</label>
+          <input id="card-number" type="text">
+
+          <label for="month year">EXP. DATE (MM/YY)</label>
+          <input id="month" type="text">
+          <input id="year" type="text">
+
+          <label for="cvc"></label>
+          <input id="cvc"type="text">
+
+          <button type="submit">Confirm</button>
+        </form>
+
+        <!-- THANK YOU -->
+        <dialog class"hidden">
+          <img src="" alt="">
+          <h2>THANK YOU!</h2>
+          <p>We've added your card details</p>
+          <button>Continue</button>
+        </dialog>
+
+      </section>
+  </main>
+
+  <footer>
+    <time datetime="2023-05-15">Start Date/Time: May 6 2023 09:00 </time>
+    <time datetime="2023-05-15">End Date/Time: May 6 2023 09:00 </time>
+  </footer>
+
 </body>
 </html>
