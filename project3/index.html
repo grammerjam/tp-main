@@ -116,14 +116,14 @@
       >
         <form
           class="max-w-[300px] flex flex-col pt-[7rem] w-[90vw] m-auto"
-          action="submit"
+          action="javascript:validateInputs()"
         >
           <div
             class="input-control max-w-[300px] flex flex-col w-[90vw] m-auto"
           >
             <label for="name block">CARDHOLDER NAME</label>
             <input
-              class="input-name border rounded h-10 mt-1 pl-3 focus:outline-input-active invalid:input-error required"
+              class="input-name border rounded h-10 mt-1 pl-3 focus:outline-input-active invalid:input-error"
               id="name"
               type="text"
               placeholder="e.g Jane Appleseed"
@@ -136,12 +136,10 @@
           >
             <label class="pt-5" for="card-number">CARD NUMBER</label>
             <input
-              class="input-number border rounded h-10 mt-1 pl-3 focus:outline-input-active invalid:input-error required"
+              class="input-number border rounded h-10 mt-1 pl-3 focus:outline-input-active invalid:input-error"
               id="card-number"
               type="text"
               placeholder="e.g. 1234 5678 9123 0000"
-              minlength="15"
-              maxlength="16"
             />
 
             <div class="error"></div>
