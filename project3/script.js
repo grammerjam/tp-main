@@ -1,3 +1,4 @@
+const form = document.querySelector("form");
 const cardNumber = document.querySelector(".card-number");
 const cardName = document.querySelector(".card-name");
 const cardDate = document.querySelector(".card-date");
@@ -39,7 +40,7 @@ form.addEventListener("submit", (e) => {
 });
 
 const setError = (element, message) => {
-  const inputControl = element.ParentElement;
+  const inputControl = element.parentElement;
   const errorDisplay = inputControl.querySelector(".error");
 
   errorDisplay.innerText = message;
@@ -48,7 +49,7 @@ const setError = (element, message) => {
 };
 
 const setSuccess = (element) => {
-  const inputControl = element.ParentElement;
+  const inputControl = element.parentElement;
   const errorDisplay = inputControl.querySelector(".error");
 
   errorDisplay.innerText = "";
@@ -67,7 +68,7 @@ const validateInputs = () => {
   const cardMonthValue = inputMonth.value.trim();
   const cardYearValue = inputYear.value.trim();
   const cardCvcValue = inputCvc.value.trim();
-
+  
   if (cardNumberValue === "") {
     setError(inputNumber, "Can't be blank");
   } else if (!isValidCardNumber(cardNumberValue)) {
