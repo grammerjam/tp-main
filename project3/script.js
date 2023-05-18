@@ -33,6 +33,17 @@ function updateCard() {
   cardCvc.innerHTML = inputCvc.value === "" ? "000" : inputCvc.value;
 }
 
+// Four Digit CC number format
+function formatCreditCardNumber(input) {
+  // Remove any non-digit characters
+  let cardNumber = input.value.replace(/\D/g, "");
+
+  // Split the card number into groups of 4 digits
+  let formattedCardNumber = cardNumber.replace(/(\d{4})(?=\d)/g, "$1 ");
+
+  // Update the input value with the formatted card number
+  input.value = formattedCardNumber;
+}
 // form validation
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -68,11 +79,21 @@ const validateInputs = () => {
   const cardMonthValue = inputMonth.value.trim();
   const cardYearValue = inputYear.value.trim();
   const cardCvcValue = inputCvc.value.trim();
-  
+
+  // Credit card number length validation
+
+  const minCardNumberLength = 16;
+  const maxCardNumberLength = 16;
+
   if (cardNumberValue === "") {
     setError(inputNumber, "Can't be blank");
   } else if (!isValidCardNumber(cardNumberValue)) {
     setError(inputNumber, "Wrong format, numbers only");
+  } else if (
+    cardNumberValue.length < minCardNumberLength ||
+    cardNumberValue.length > maxCardNumberLength
+  ) {
+    setError(inputNumber, "Invalid credit card number length");
   } else {
     setSuccess(inputNumber);
   }
