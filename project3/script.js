@@ -56,7 +56,7 @@ const setSuccess = (element) => {
   inputControl.classList.remove("error");
 };
 
-const isValidCardNumber = https://file+.vscode-resource.vscode-cdn.net/Users/ariadnavanegas/Desktop/dev/tp-main/project3/design/mobile-design.jpg?version%3D1684429793192(cardNumber) => {
+const isValidCardNumber = (cardNumber) => {
   const re = /^[0-9]+$/;
   return re.test(cardNumber);
 };
@@ -64,7 +64,8 @@ const isValidCardNumber = https://file+.vscode-resource.vscode-cdn.net/Users/ari
 const validateInputs = () => {
   const cardNumberValue = inputNumber.value.trim();
   const cardNameValue = inputName.value.trim();
-  const cardDateValue = inputDate.value.trim();
+  const cardMonthValue = inputMonth.value.trim();
+  const cardYearValue = inputYear.value.trim();
   const cardCvcValue = inputCvc.value.trim();
 
   if (cardNumberValue === "") {
