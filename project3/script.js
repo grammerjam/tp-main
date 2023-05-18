@@ -38,7 +38,7 @@ form.addEventListener("submit", (e) => {
   validateInputs();
 });
 
-const setErrot = (element, message) => {
+const setError = (element, message) => {
   const inputControl = element.ParentElement;
   const errorDisplay = inputControl.querySelector(".error");
 
@@ -47,33 +47,55 @@ const setErrot = (element, message) => {
   inputControl.classList.remove("success");
 };
 
+const setSuccess = (element) => {
+  const inputControl = element.ParentElement;
+  const errorDisplay = inputControl.querySelector(".error");
+
+  errorDisplay.innerText = "";
+  inputControl.classList.add("success");
+  inputControl.classList.remove("error");
+};
+
+const isValidCardNumber = (cardNumber) => {
+  const re = /^[0-9]+$/;
+  return re.test(cardNumber);
+};
+
 const validateInputs = () => {
-  const cardNumberValue = cardNumber.value.trim();
-  const cardNameValue = cardName.value.trim();
-  const cardDateValue = cardDate.value.trim();
-  const cardCvcValue = cardCvc.value.trim();
+  const cardNumberValue = inputNumber.value.trim();
+  const cardNameValue = inputName.value.trim();
+  const cardMonthValue = inputMonth.value.trim();
+  const cardYearValue = inputYear.value.trim();
+  const cardCvcValue = inputCvc.value.trim();
 
   if (cardNumberValue === "") {
-    setError(cardNumber, "Numbers required");
+    setError(inputNumber, "Can't be blank");
+  } else if (!isValidCardNumber(cardNumberValue)) {
+    setError(inputNumber, "Wrong format, numbers only");
   } else {
-    setSuccess(cardNumber);
+    setSuccess(inputNumber);
   }
 
   if (cardNameValue === "") {
-    setError(cardName, "Name on card required");
+    setError(inputName, "Can't be blank");
   } else {
-    setSuccess(cardName);
+    setSuccess(inputName);
   }
 
-  if (cardDateValue === "") {
-    setError(cardDate, "Date is required");
+  if (cardMonthValue === "") {
+    setError(inputMonth, "Can't be blank");
   } else {
-    setSuccess(cardDate);
+    setSuccess(inputMonth);
+  }
+  if (cardYearValue === "") {
+    setError(inputYear, "Can't be blank");
+  } else {
+    setSuccess(inputYear);
   }
 
   if (cardCvcValue === "") {
-    setError(cardCvc, "Cvc is required");
+    setError(inputCvc, "Can't be blank");
   } else {
-    setSuccess(cardCvc);
+    setSuccess(inputCvc);
   }
 };
