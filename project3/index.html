@@ -58,11 +58,11 @@
     .input-control.error input {
         border-color: hsl(0, 100%, 66%);
     }
-
+  
     .input-control .error {
         color: hsl(0, 100%, 66%);
-        font-size: 9px;
-        height: 13px;
+        font-size: 8px;
+        /* height: 13px; */
     }
   }
 
@@ -181,33 +181,39 @@
 
             <div class="flex mt-1">
               <!-- MONTH INPUT -->
-              <input
-                class="input-month border rounded h-10 w-16 mr-3 pl-3 focus:outline-input-active "
-                id="month"
-                type="text"
-                placeholder="MM"
-                maxlength="2"
-              />
-              <div class="error"></div>
+              <div class="">
+                <input
+                  class="input-month border rounded h-10 w-16 mr-3 pl-3 focus:outline-input-active "
+                  id="month"
+                  type="text"
+                  placeholder="MM"
+                  maxlength="2"
+                />
+                <div class="error"></div>
+              </div>
               <!-- YEAR INPUT -->
-              <input
-                class="input-year border rounded h-10 w-16 mr-3 pl-3 focus:outline-input-active"
-                id="year"
-                type="text"
-                placeholder="YY"
-                maxlength=""
-              />
-              <div class="error text-input-error text-[10px] p-1"></div>
+              <div class="">
+                <input
+                  class="input-year border rounded h-10 w-16 mr-3 pl-3 focus:outline-input-active"
+                  id="year"
+                  type="text"
+                  placeholder="YY"
+                  maxlength=""
+                />
+                <div class="error pl-1"></div>
+              </div>
               <!-- CVC INPUT -->
-              <input
-                class="input-cvc border rounded h-10 w-full pl-3 focus:outline-input-active"
-                id="cvc"
-                type="text"
-                placeholder="e.g. 123"
-                maxlength="3"
-              />
+              <div class="">
+                <input
+                  class="input-cvc border rounded h-10 w-full pl-3 focus:outline-input-active"
+                  id="cvc"
+                  type="text"
+                  placeholder="e.g. 123"
+                  maxlength="3"
+                />
+                <div class="error pl-1"></div>
+              </div>
             </div>
-            <div class="error"></div>
           </div>
 
           <!-- CONFIRM BUTTON -->
