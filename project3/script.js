@@ -81,14 +81,11 @@ const validateInputs = () => {
   const cardCvcValue = inputCvc.value.trim();
 
   // Credit card number length validation
-
-  const minCardNumberLength = 16;
-  const maxCardNumberLength = 16;
+  const minCardNumberLength = 19;
+  const maxCardNumberLength = 19;
 
   if (cardNumberValue === "") {
     setError(inputNumber, "Can't be blank");
-  } else if (!isValidCardNumber(cardNumberValue)) {
-    setError(inputNumber, "Wrong format, numbers only");
   } else if (
     cardNumberValue.length < minCardNumberLength ||
     cardNumberValue.length > maxCardNumberLength
@@ -109,6 +106,7 @@ const validateInputs = () => {
   } else {
     setSuccess(inputMonth);
   }
+
   if (cardYearValue === "") {
     setError(inputYear, "Can't be blank");
   } else {
@@ -120,4 +118,42 @@ const validateInputs = () => {
   } else {
     setSuccess(inputCvc);
   }
+
+  // Check if all inputs are valid
+  const errorDisplays = [
+    inputNumber.parentElement.querySelector(".error"),
+    inputName.parentElement.querySelector(".error"),
+    inputMonth.parentElement.querySelector(".error"),
+    inputYear.parentElement.querySelector(".error"),
+    inputCvc.parentElement.querySelector(".error"),
+  ];
+  const isValid = errorDisplays.every(
+    (errorDisplay) => errorDisplay.innerText === ""
+  );
+
+  return isValid;
 };
+// Thank you screen
+const submitButton = document.getElementById("submitButton");
+const hiddenElement = document.getElementById("hiddenElement");
+const myForm = document.getElementById("myForm");
+
+submitButton.addEventListener("click", function () {
+  const isFormValid = validateInputs();
+
+  if (isFormValid) {
+    hiddenElement.classList.remove("hidden");
+    myForm.style.display = "none";
+  }
+});
+
+// Confirm Button
+
+const confirmButton = document.getElementById("confirmButton");
+// const hiddenElement = document.getElementById("hiddenElement");
+// const myForm = document.getElementById("myForm");
+
+confirmButton.addEventListener("click", function () {
+  hiddenElement.classList.add("hidden");
+  myForm.style.display = "block";
+});
