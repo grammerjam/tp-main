@@ -19,6 +19,8 @@ inputMonth.addEventListener("input", updateCard);
 inputYear.addEventListener("input", updateCard);
 inputCvc.addEventListener("input", updateCard);
 
+const cardImage = document.querySelector(".card-image");
+
 function updateCard() {
   cardNumber.innerHTML =
     inputNumber.value === ""
@@ -31,6 +33,17 @@ function updateCard() {
       ? "00/00"
       : inputMonth.value + "/" + inputYear.value;
   cardCvc.innerHTML = inputCvc.value === "" ? "000" : inputCvc.value;
+
+  if (isValidVisaCard(cardNumberValue)) {
+    cardImage.src = "visa.png";
+    cardImage.alt = "Visa Card";
+  } else if (isValidAmexCard(cardNumberValue)) {
+    cardImage.src = "amex.png";
+    cardImage.alt = "Amex Card";
+  } else {
+    cardImage.src = "";
+    cardImage.alt = "Card";
+  }
 }
 
 // Four Digit CC number format
@@ -73,6 +86,16 @@ const isValidCardNumber = (cardNumber) => {
   return re.test(cardNumber);
 };
 
+const isValidVisaCard = (cardNumber) => {
+  const visaPattern = /^4[0-9]{12}(?:[0-9]{3})?$/;
+  return visaPattern.test(cardNumber);
+};
+
+const isValidAmexCard = (cardNumber) => {
+  const amexPattern = /^3[47][0-9]{13}$/;
+  return amexPattern.test(cardNumber);
+};
+
 const validateInputs = () => {
   const cardNumberValue = inputNumber.value.trim();
   const cardNameValue = inputName.value.trim();
@@ -91,6 +114,11 @@ const validateInputs = () => {
     cardNumberValue.length > maxCardNumberLength
   ) {
     setError(inputNumber, "Invalid credit card number length");
+  } else if (
+    !isValidVisaCard(cardNumberValue) &&
+    !isValidAmexCard(cardNumberValue)
+  ) {
+    setError(inputNumber, "Invalid card number pattern");
   } else {
     setSuccess(inputNumber);
   }
