@@ -42,36 +42,56 @@
               "back-card": "url('./images/bg-card-back.png')",
             },
             screens: {
-              dt: "376px",
+              dt: "800px",
             },
           },
         },
       };
     </script>
+    <style type="text/tailwindcss">
+    @layer utilities {
+      .input-control.success input {
+    border-color: hsl(249, 99%, 64%);
+    }
+    
+
+    .input-control.error input {
+        border-color: hsl(0, 100%, 66%);
+    }
+  
+    .input-control .error {
+        color: hsl(0, 100%, 66%);
+        font-size: 8px;
+        /* height: 13px; */
+    }
+  }
+
+  </style>
     <!-- TODO -->
-    <!-- 1. name variables that need to be targeted in JS
-  2. research on change
-  3. change form to hidden on button submit and show dialog
+    <!-- 
+  3. change form to hidden on button submit and show thank you div
   4. add required to elements and style errors or alert with JS
-  5. mobile responsiveness 
   6. add client-side form validation
-  7. deploy to Netlify
   8. add nav
-  9. reset page on continue button click -->
+  9. reset page on continue button click
+ -->
   </head>
   <body>
+    <nav class="text-center">
+      <h1 class="font-bold text-lg">Team Perseverance</h1>
+    </nav>
     <main class="dt:flex dt:w-[100vw] dt:h-[100vh] pb-20">
       <header
-        class="dt:h-[100vh] dt:w-1/3 h-[30vh] dt:bg-desktop-header dt:bg-cover bg-mobile-header"
+        class="dt:h-[100vh] dt:w-1/3 h-[30vh] dt:bg-desktop-header relative dt:bg-cover bg-mobile-header"
       >
         <!-- FRONT CARD -->
         <div
-          class="dt:h-[12rem] dt:w-[20rem] dt:top-[8rem] dt:left-[16rem] front-card rounded-md bg-front-card bg-right-top absolute h-[10rem] w-[18rem] top-28 left-4 rounded-md z-10"
+          class="dt:h-[12rem] dt:w-[20rem] dt:top-[8rem] dt:-right-28 rounded-md bg-front-card bg-right-top absolute h-[10rem] w-[18rem] top-28 max-dt:left-4 rounded-md z-10"
         >
           <!-- FRONT CARD INFO -->
           <div class="dt:pt-4 py-3 px-4 text-white">
             <div class="card-logo">
-              <img class="h-7" src="./images/card-logo.svg" alt="Card Logo" />
+              <img class="card-image h-7" src="./images/card-logo.svg" alt="Card Logo" />
             </div>
 
             <div
@@ -79,6 +99,9 @@
             >
               <p class="card-number">0000 0000 0000 0000</p>
             </div>
+
+            <!-- VISA AND AMEX LOGO -->
+            <!-- <img src="" alt="" class=""> -->
 
             <div
               class="flex justify-between max-w-[232px] text-[10px] pt-4 pl-2"
@@ -96,7 +119,7 @@
 
         <!-- BACK CARD -->
         <div
-          class="dt:h-[12rem] dt:w-[20rem] dt:top-[22rem] dt:left-[20rem] dt:bg-[center] back-card rounded-md bg-back-card bg-[cover] absolute h-[10rem] w-[18rem] top-5 left-16 rounded-md"
+          class="dt:h-[12rem] dt:w-[20rem] dt:top-[22rem] dt:-right-48 dt:bg-[center] back-card rounded-md bg-back-card bg-[cover] absolute h-[10rem] w-[18rem] top-5 max-dt:left-16 rounded-md"
         >
           <div class="black-stripe"></div>
           <div class="gray-stripe">
@@ -114,14 +137,15 @@
       <section
         class="dt:w-2/3 dt:m-auto h-[60vh] font-ff-space text-sm font-medium tracking-widest"
       >
-        <form
+        <form id="myForm"
           class="max-w-[300px] flex flex-col pt-[7rem] w-[90vw] m-auto"
           action="javascript:validateInputs()"
         >
-          <div
-            class="input-control max-w-[300px] flex flex-col w-[90vw] m-auto"
-          >
-            <label for="name block">CARDHOLDER NAME</label>
+        <div
+        class="input-control max-w-[300px] flex flex-col w-[90vw] m-auto"
+        >
+        <label for="name block">CARDHOLDER NAME</label>
+            <!-- CARD NAME INPUT -->
             <input
               class="input-name border rounded h-10 mt-1 pl-3 focus:outline-input-active invalid:input-error"
               id="name"
@@ -130,66 +154,84 @@
             />
             <div class="error"></div>
           </div>
-
           <div
-            class="input-control max-w-[300px] flex flex-col w-[90vw] m-auto"
+          class="input-control max-w-[300px] flex flex-col w-[90vw] m-auto"
           >
-            <label class="pt-5" for="card-number">CARD NUMBER</label>
+          <label class="pt-5" for="card-number">CARD NUMBER</label>
+            <!-- CARD NUMBER INPUT -->
             <input
-              class="input-number border rounded h-10 mt-1 pl-3 focus:outline-input-active invalid:input-error"
-              id="card-number"
+              class="input-number border rounded h-10 mt-1 pl-3 focus:outline-input-active"
+              id="card-number creditCardNumber"
+              oninput="formatCreditCardNumber(this)"
               type="text"
               placeholder="e.g. 1234 5678 9123 0000"
+              maxlength="19"
             />
 
             <div class="error"></div>
           </div>
 
+          <!-- CARD EXPIRATION DATE -->
           <div
             class="input-control max-w-[300px] flex flex-col w-[90vw] m-auto"
           >
+
+            <!-- EXP DATE LABELS -->
             <div class="pt-5">
               <label for="month year">EXP. DATE (MM/YY)</label>
               <label for="cvc">CVC</label>
             </div>
 
             <div class="flex mt-1">
-              <input
-                class="input-month border rounded h-10 w-16 mr-3 pl-3 focus:outline-input-active invalid:input-error"
-                id="month"
-                type="text"
-                placeholder="MM"
-              />
-
-              <input
-                class="input-year border rounded h-10 w-16 mr-3 pl-3 focus:outline-input-active invalid:input-error"
-                id="year"
-                type="text"
-                placeholder="YY"
-              />
-
-              <input
-                class="input-cvc border rounded h-10 w-full pl-3 focus:outline-input-active invalid:input-error"
-                id="cvc"
-                type="text"
-                placeholder="e.g. 123"
-              />
+              <!-- MONTH INPUT -->
+              <div class="">
+                <input
+                  class="input-month border rounded h-10 w-16 mr-3 pl-3 focus:outline-input-active "
+                  id="month"
+                  type="text"
+                  placeholder="MM"
+                  maxlength="2"
+                />
+                <div class="error"></div>
+              </div>
+              <!-- YEAR INPUT -->
+              <div class="">
+                <input
+                  class="input-year border rounded h-10 w-16 mr-3 pl-3 focus:outline-input-active"
+                  id="year"
+                  type="text"
+                  placeholder="YY"
+                  maxlength="2"
+                />
+                <div class="error pl-1"></div>
+              </div>
+              <!-- CVC INPUT -->
+              <div class="">
+                <input
+                  class="input-cvc border rounded h-10 w-full pl-3 focus:outline-input-active"
+                  id="cvc"
+                  type="text"
+                  placeholder="e.g. 123"
+                  maxlength="4"
+                />
+                <div class="error pl-1"></div>
+              </div>
             </div>
-            <div class="error"></div>
           </div>
 
+          <!-- CONFIRM BUTTON -->
           <button
-            class="confirm-btn h-10 bg-dark-violet text-white mt-8 rounded-md tracking-wide"
+            class="confirm-btn h-10 min-w-[300px] bg-dark-violet text-white mt-8 rounded-md tracking-wide"
             type="submit"
+            id="submitButton" 
           >
             Confirm
           </button>
         </form>
 
         <!-- THANK YOU -->
-
         <div
-          class="hidden max-w-[300px] flex flex-col text-center pt-[7rem] w-[90vw] m-auto [&>*]:mb-4"
+          class="hidden max-w-[300px] flex flex-col text-center pt-[7rem] w-[90vw] m-auto [&>*]:mb-4" id="hiddenElement"
         >
           <img
             class="h-18 w-18 self-center"
@@ -200,19 +242,22 @@
           <p class="text-[1.1rem] font-medium text-dark-gray">
             We've added your card details
           </p>
-          <button
-            class="continue-btn h-12 bg-dark-violet text-white mt-8 rounded-md tracking-wide"
-          >
-            Continue
-          </button>
+          
+          <button class="confirm-btn h-10 bg-dark-violet text-white mt-8 rounded-md tracking-wide" type="submit" id="confirmButton" >Confirm</button>
         </div>
-      </section>
-    </main>
 
-    <footer>
-      <time datetime="2023-05-15">Start Date/Time: May 6 2023 09:00 </time>
-      <time datetime="2023-05-15">End Date/Time: May 6 2023 09:00 </time>
-    </footer>
-    <script src="./script.js"></script>
-  </body>
+      </form>
+
+      </div>
+
+    </section>
+  </main>
+
+  <footer class="flex justify-around">
+    <time datetime="2023-05-15">Start Date/Time: May 15 2023 09:00 </time>
+    <time datetime="2023-05-18">End Date/Time: May 18 2023 17:00 </time>
+  </footer>
+  <script src="./script.js"></script>
+</body>
 </html>
+
