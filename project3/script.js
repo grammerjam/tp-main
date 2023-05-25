@@ -53,7 +53,6 @@ function updateCard() {
       ? "00/00"
       : inputMonth.value + "/" + inputYear.value;
   cardCvc.innerHTML = inputCvc.value === "" ? "000" : inputCvc.value;
-
 }
 
 function formatCreditCardNumber(input) {
@@ -73,8 +72,6 @@ function formatCreditCardNumber(input) {
     inputNumber.value = formattedCardNumber;
   }
 }
-
-
 
 const isValidCardNumber = (cardNumber) => {
   const re = /^[0-9]+$/;
@@ -115,12 +112,8 @@ const validateInputs = () => {
   const minCardNumberLength = 15;
   const maxCardNumberLength = 19;
 
-
   const isValidVisaCard = (cardNumberValue) => {
-    if (
-      cardNumberValue[0] === "4" &&
-      cardNumberValue.length === 19
-    ) {
+    if (cardNumberValue[0] === "4" && cardNumberValue.length === 19) {
       return true;
     } else {
       return false;
@@ -129,7 +122,8 @@ const validateInputs = () => {
 
   const isValidAmexCard = (cardNumberValue) => {
     if (
-      cardNumberValue[0] === "3" && cardNumberValue[1] === "7" &&
+      cardNumberValue[0] === "3" &&
+      cardNumberValue[1] === "7" &&
       cardNumberValue.length === 17
     ) {
       return true;
@@ -137,7 +131,7 @@ const validateInputs = () => {
       return false;
     }
   };
-  
+
   if (cardNumberValue === "") {
     setError(inputNumber, "Can't be blank");
   } else if (
@@ -145,15 +139,12 @@ const validateInputs = () => {
     cardNumberValue.length > maxCardNumberLength
   ) {
     setError(inputNumber, "Invalid credit card number length");
-  } 
+  }
   if (cardNumberValue[0] === "4" && cardNumberValue.length === 19) {
     cardImage.src = "./images/visa.png";
     cardImage.alt = "Visa Card";
   }
-  if (
-    cardNumberValue.slice(0, 2) === "37" &&
-    cardNumberValue.length === 15 
-  ) {
+  if (cardNumberValue.slice(0, 2) === "37" && cardNumberValue.length === 15) {
     cardImage.src = "./images/amex.png";
     cardImage.alt = "Amex Card";
   } else {
@@ -179,14 +170,17 @@ const validateInputs = () => {
   }
   console.log(isValidAmexCard(cardNumberValue));
   console.log(isValidVisaCard(cardNumberValue));
-  console.log(cardCvcValue)
+  console.log(cardCvcValue);
   if (cardCvcValue === "") {
     setError(inputCvc, "Can't be blank");
   } else if (isValidVisaCard(cardNumberValue) && cardCvcValue.length === 3) {
     setSuccess(inputCvc);
   } else if (isValidAmexCard(cardNumberValue) && cardCvcValue.length === 4) {
     setSuccess(inputCvc);
-  } else if (isValidVisaCard(cardNumberValue) && cardCvcValue.length !== 3) {
+  } else if (
+    (isValidVisaCard(cardNumberValue) && cardCvcValue.length !== 3) ||
+    (isValidAmexCard(cardNumberValue) && cardCvcValue.length !== 4)
+  ) {
     setError(inputCvc, "Invalid Length");
   } else {
     setSuccess(inputCvc);
