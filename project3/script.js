@@ -186,10 +186,10 @@ const validateInputs = () => {
     setSuccess(inputCvc);
   } else if (isValidAmexCard(cardNumberValue) && cardCvcValue.length === 4) {
     setSuccess(inputCvc);
-  } else {
-    console.log("works")
+  } else if (isValidVisaCard(cardNumberValue) && cardCvcValue.length !== 3) {
     setError(inputCvc, "Invalid Length");
-    
+  } else {
+    setSuccess(inputCvc);
   }
 
   // Check if all inputs are valid
