@@ -29,8 +29,22 @@ function updateCard() {
       /^(\d{4})(\d{6})(\d{5})$/,
       "$1 $2 $3"
     );
+    inputNumber.maxLength = 15;
+    inputCvc.maxLength = 4;
+    cardImage.src = "./images/amex.png";
+    cardImage.alt = "Amex Card";
+  } else if (inputNumber.value[0] === "4") {
+    cardNumber.innerHTML = inputNumber.value.replace(/(\d{4})(?=\d)/g, "$1 ");
+    inputNumber.maxLength = 19;
+    inputCvc.maxLength = 3;
+    cardImage.src = "./images/visa.png";
+    cardImage.alt = "Visa Card";
   } else {
     cardNumber.innerHTML = inputNumber.value.replace(/(\d{4})(?=\d)/g, "$1 ");
+    inputNumber.maxLength = 19;
+    inputCvc.maxLength = 3;
+    cardImage.src = "./images/card-logo.svg";
+    cardImage.alt = "Card";
   }
   cardName.innerHTML =
     inputName.value === "" ? "JANE APPLESEED" : inputName.value.toUpperCase();
@@ -40,33 +54,7 @@ function updateCard() {
       : inputMonth.value + "/" + inputYear.value;
   cardCvc.innerHTML = inputCvc.value === "" ? "000" : inputCvc.value;
 
-  // if (inputNumber.value[0] === "4") {
-  //   cardImage.src = "./images/visa.png";
-  //   cardImage.alt = "Visa Card";
-  // } else if (inputNumber.value.slice(0, 2) === "37") {
-  //   cardImage.src = "./images/amex.png";
-  //   cardImage.alt = "Amex Card";
-  // } else {
-  //   cardImage.src = "./images/card-logo.svg";
-  //   cardImage.alt = "Card";
-  // }
 }
-
-// Four Digit CC number format
-// function formatCreditCardNumber(input) {
-//   // Remove any non-digit characters
-//   let cardNumber = input.value.replace(/\D/g, "");
-
-//   // Split the card number into groups of 4 digits
-//   let formattedCardNumber = cardNumber.replace(/(\d{4})(?=\d)/g, "$1 ");
-//   let formattedCardAmex= cardNumber.replace(
-//     /^(\d{4})(\d{6})(\d{5})$/,
-//     "$1 $2 $3"
-//   );
-
-//   // Update the input value with the formatted card number
-//   input.value = formattedCardNumber;
-// }
 
 function formatCreditCardNumber(input) {
   // Remove any non-digit characters
@@ -85,6 +73,8 @@ function formatCreditCardNumber(input) {
     inputNumber.value = formattedCardNumber;
   }
 }
+
+
 
 const isValidCardNumber = (cardNumber) => {
   const re = /^[0-9]+$/;
@@ -125,41 +115,29 @@ const validateInputs = () => {
   const minCardNumberLength = 15;
   const maxCardNumberLength = 19;
 
-  function formatCreditCardNumber(input) {
-    // Remove any non-digit characters
-    let cardNumber = input.value.replace(/\D/g, "");
-
-    // Split the card number into groups of 4 digits
-    let formattedCardNumber = cardNumber.replace(/(\d{4})(?=\d)/g, "$1 ");
-    let formattedCardAmex = cardNumber.replace(
-      /^(\d{4})(\d{6})(\d{5})$/,
-      "$1 $2 $3"
-    );
-
-    // Update the input value with the formatted card number
-    input.value = formattedCardNumber;
-  }
 
   const isValidVisaCard = (cardNumberValue) => {
-    if (cardNumberValue[0] === "4" && cardNumberValue.length === 19) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
-  const isValidAmexCard = (cardNumber) => {
     if (
-      cardNumberValue.slice(0, 2) === "37" &&
-      cardNumberValue.length === 18 &&
-      cardCvcValue.length === 4
+      cardNumberValue[0] === "4" &&
+      cardNumberValue.length === 19
     ) {
       return true;
     } else {
       return false;
     }
   };
-  console.log(cardNumberValue);
+
+  const isValidAmexCard = (cardNumberValue) => {
+    if (
+      cardNumberValue[0] === "3" && cardNumberValue[1] === "7" &&
+      cardNumberValue.length === 17
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+  
   if (cardNumberValue === "") {
     setError(inputNumber, "Can't be blank");
   } else if (
@@ -167,20 +145,14 @@ const validateInputs = () => {
     cardNumberValue.length > maxCardNumberLength
   ) {
     setError(inputNumber, "Invalid credit card number length");
-  } else if (
-    !isValidVisaCard(cardNumberValue) &&
-    !isValidAmexCard(cardNumberValue)
-  ) {
-    setError(inputNumber, "Invalid card number pattern");
-  }
+  } 
   if (cardNumberValue[0] === "4" && cardNumberValue.length === 19) {
     cardImage.src = "./images/visa.png";
     cardImage.alt = "Visa Card";
   }
   if (
     cardNumberValue.slice(0, 2) === "37" &&
-    cardNumberValue.length === 18 &&
-    cardCvcValue.length === 4
+    cardNumberValue.length === 15 
   ) {
     cardImage.src = "./images/amex.png";
     cardImage.alt = "Amex Card";
@@ -205,11 +177,19 @@ const validateInputs = () => {
   } else {
     setSuccess(inputYear);
   }
-
+  console.log(isValidAmexCard(cardNumberValue));
+  console.log(isValidVisaCard(cardNumberValue));
+  console.log(cardCvcValue)
   if (cardCvcValue === "") {
     setError(inputCvc, "Can't be blank");
-  } else {
+  } else if (isValidVisaCard(cardNumberValue) && cardCvcValue.length === 3) {
     setSuccess(inputCvc);
+  } else if (isValidAmexCard(cardNumberValue) && cardCvcValue.length === 4) {
+    setSuccess(inputCvc);
+  } else {
+    console.log("works")
+    setError(inputCvc, "Invalid Length");
+    
   }
 
   // Check if all inputs are valid
