@@ -148,12 +148,13 @@ const validateInputs = () => {
   ) {
     cardImage.src = "./images/amex.png";
     cardImage.alt = "Amex Card";
-  }
-  if (cardNumberValue[0] === "4" && cardNumberValue.length === 19) {
+  } else if (cardNumberValue[0] === "4" && cardNumberValue.length === 19) {
     cardImage.src = "./images/visa.png";
     cardImage.alt = "Visa Card";
-  }
-  if (cardNumberValue.slice(0, 2) === "37" && cardNumberValue.length === 15) {
+  } else if (
+    cardNumberValue.slice(0, 2) === "37" &&
+    cardNumberValue.length === 15
+  ) {
     cardImage.src = "./images/amex.png";
     cardImage.alt = "Amex Card";
   } else {
