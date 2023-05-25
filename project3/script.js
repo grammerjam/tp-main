@@ -108,32 +108,6 @@ const validateInputs = () => {
   const cardYearValue = inputYear.value.trim();
   const cardCvcValue = inputCvc.value.trim();
 
-
-  // Credit card number length validation
-  const minCardNumberLength = 15;
-  const maxCardNumberLength = 19;
-
-  const isValidVisaCard = (cardNumberValue) => {
-    if (cardNumberValue[0] === "4" && cardNumberValue.length === 19) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
-  const isValidAmexCard = (cardNumberValue) => {
-    if (
-      cardNumberValue[0] === "3" &&
-      cardNumberValue[1] === "7" &&
-      cardNumberValue.length === 17
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
-
   // Credit card number length validation
   const minCardNumberLength = 15;
   const maxCardNumberLength = 19;
@@ -160,13 +134,11 @@ const validateInputs = () => {
 
   if (cardNumberValue === "") {
     setError(inputNumber, "Can't be blank");
-
   } else if (
     cardNumberValue.length < minCardNumberLength ||
     cardNumberValue.length > maxCardNumberLength
   ) {
     setError(inputNumber, "Invalid credit card number length");
-
   } else if (cardNumberValue[0] === "4" && cardNumberValue.length === 19) {
     cardImage.src = "./images/visa.png";
     cardImage.alt = "Visa Card";
@@ -176,7 +148,6 @@ const validateInputs = () => {
   ) {
     cardImage.src = "./images/amex.png";
     cardImage.alt = "Amex Card";
-
   }
   if (cardNumberValue[0] === "4" && cardNumberValue.length === 19) {
     cardImage.src = "./images/visa.png";
@@ -185,7 +156,6 @@ const validateInputs = () => {
   if (cardNumberValue.slice(0, 2) === "37" && cardNumberValue.length === 15) {
     cardImage.src = "./images/amex.png";
     cardImage.alt = "Amex Card";
-
   } else {
     setSuccess(inputNumber);
   }
