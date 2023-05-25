@@ -22,10 +22,16 @@ inputCvc.addEventListener("input", updateCard);
 const cardImage = document.querySelector(".card-image");
 
 function updateCard() {
-  cardNumber.innerHTML =
-    inputNumber.value === ""
-      ? "0000 0000 0000 0000"
-      : inputNumber.value.replace(/\W/gi, "").replace(/(.{4})/g, "$1 ");
+  if (inputNumber.value === "") {
+    cardNumber.innerHTML = "0000 0000 0000 0000";
+  } else if (inputNumber.value.slice(0, 2) === "37") {
+    cardNumber.innerHTML = inputNumber.value.replace(
+      /^(\d{4})(\d{6})(\d{5})$/,
+      "$1 $2 $3"
+    );
+  } else {
+    cardNumber.innerHTML = inputNumber.value.replace(/(\d{4})(?=\d)/g, "$1 ");
+  }
   cardName.innerHTML =
     inputName.value === "" ? "JANE APPLESEED" : inputName.value.toUpperCase();
   cardDate.innerHTML =
@@ -34,29 +40,56 @@ function updateCard() {
       : inputMonth.value + "/" + inputYear.value;
   cardCvc.innerHTML = inputCvc.value === "" ? "000" : inputCvc.value;
 
-  if (isValidVisaCard(cardNumberValue)) {
-    cardImage.src = "visa.png";
-    cardImage.alt = "Visa Card";
-  } else if (isValidAmexCard(cardNumberValue)) {
-    cardImage.src = "amex.png";
-    cardImage.alt = "Amex Card";
-  } else {
-    cardImage.src = "";
-    cardImage.alt = "Card";
-  }
+  // if (inputNumber.value[0] === "4") {
+  //   cardImage.src = "./images/visa.png";
+  //   cardImage.alt = "Visa Card";
+  // } else if (inputNumber.value.slice(0, 2) === "37") {
+  //   cardImage.src = "./images/amex.png";
+  //   cardImage.alt = "Amex Card";
+  // } else {
+  //   cardImage.src = "./images/card-logo.svg";
+  //   cardImage.alt = "Card";
+  // }
 }
 
 // Four Digit CC number format
+// function formatCreditCardNumber(input) {
+//   // Remove any non-digit characters
+//   let cardNumber = input.value.replace(/\D/g, "");
+
+//   // Split the card number into groups of 4 digits
+//   let formattedCardNumber = cardNumber.replace(/(\d{4})(?=\d)/g, "$1 ");
+//   let formattedCardAmex= cardNumber.replace(
+//     /^(\d{4})(\d{6})(\d{5})$/,
+//     "$1 $2 $3"
+//   );
+
+//   // Update the input value with the formatted card number
+//   input.value = formattedCardNumber;
+// }
+
 function formatCreditCardNumber(input) {
   // Remove any non-digit characters
-  let cardNumber = input.value.replace(/\D/g, "");
+  let cardNumber = inputNumber.value.replace(/\D/g, "");
 
   // Split the card number into groups of 4 digits
   let formattedCardNumber = cardNumber.replace(/(\d{4})(?=\d)/g, "$1 ");
+  let formattedCardAmex = cardNumber.replace(
+    /^(\d{4})(\d{6})(\d{5})$/,
+    "$1 $2 $3"
+  );
 
-  // Update the input value with the formatted card number
-  input.value = formattedCardNumber;
+  if (inputNumber.value.slice(0, 2) === "37") {
+    inputNumber.value = formattedCardAmex;
+  } else {
+    inputNumber.value = formattedCardNumber;
+  }
 }
+
+const isValidCardNumber = (cardNumber) => {
+  const re = /^[0-9]+$/;
+  return re.test(cardNumber);
+};
 // form validation
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -81,21 +114,6 @@ const setSuccess = (element) => {
   inputControl.classList.remove("error");
 };
 
-const isValidCardNumber = (cardNumber) => {
-  const re = /^[0-9]+$/;
-  return re.test(cardNumber);
-};
-
-const isValidVisaCard = (cardNumber) => {
-  const visaPattern = /^4[0-9]{12}(?:[0-9]{3})?$/;
-  return visaPattern.test(cardNumber);
-};
-
-const isValidAmexCard = (cardNumber) => {
-  const amexPattern = /^3[47][0-9]{13}$/;
-  return amexPattern.test(cardNumber);
-};
-
 const validateInputs = () => {
   const cardNumberValue = inputNumber.value.trim();
   const cardNameValue = inputName.value.trim();
@@ -104,9 +122,44 @@ const validateInputs = () => {
   const cardCvcValue = inputCvc.value.trim();
 
   // Credit card number length validation
-  const minCardNumberLength = 19;
+  const minCardNumberLength = 15;
   const maxCardNumberLength = 19;
 
+  function formatCreditCardNumber(input) {
+    // Remove any non-digit characters
+    let cardNumber = input.value.replace(/\D/g, "");
+
+    // Split the card number into groups of 4 digits
+    let formattedCardNumber = cardNumber.replace(/(\d{4})(?=\d)/g, "$1 ");
+    let formattedCardAmex = cardNumber.replace(
+      /^(\d{4})(\d{6})(\d{5})$/,
+      "$1 $2 $3"
+    );
+
+    // Update the input value with the formatted card number
+    input.value = formattedCardNumber;
+  }
+
+  const isValidVisaCard = (cardNumberValue) => {
+    if (cardNumberValue[0] === "4" && cardNumberValue.length === 19) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const isValidAmexCard = (cardNumber) => {
+    if (
+      cardNumberValue.slice(0, 2) === "37" &&
+      cardNumberValue.length === 18 &&
+      cardCvcValue.length === 4
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+  console.log(cardNumberValue);
   if (cardNumberValue === "") {
     setError(inputNumber, "Can't be blank");
   } else if (
@@ -119,6 +172,18 @@ const validateInputs = () => {
     !isValidAmexCard(cardNumberValue)
   ) {
     setError(inputNumber, "Invalid card number pattern");
+  }
+  if (cardNumberValue[0] === "4" && cardNumberValue.length === 19) {
+    cardImage.src = "./images/visa.png";
+    cardImage.alt = "Visa Card";
+  }
+  if (
+    cardNumberValue.slice(0, 2) === "37" &&
+    cardNumberValue.length === 18 &&
+    cardCvcValue.length === 4
+  ) {
+    cardImage.src = "./images/amex.png";
+    cardImage.alt = "Amex Card";
   } else {
     setSuccess(inputNumber);
   }
