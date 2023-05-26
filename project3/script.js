@@ -164,19 +164,26 @@ const validateInputs = () => {
   if (cardNameValue === "") {
     setError(inputName, "Can't be blank");
   } else if (!cardNameValue.includes(" ")) {
-    setError(inputName, "Invalid name format");
+    setError(inputName, "Invalid name fo");
   } else {
     setSuccess(inputName);
   }
 
   if (cardMonthValue === "") {
     setError(inputMonth, "Can't be blank");
+  } else if (cardMonthValue > 12) {
+    setError(inputMonth, "Invalid month");
   } else {
     setSuccess(inputMonth);
   }
 
+  const currentYear = new Date().getFullYear();
+  const currentYearLastTwoDigits = currentYear % 100;
+
   if (cardYearValue === "") {
     setError(inputYear, "Can't be blank");
+  } else if (parseInt(cardYearValue) < currentYearLastTwoDigits) {
+    setError(inputYear, "Invalid year");
   } else {
     setSuccess(inputYear);
   }
