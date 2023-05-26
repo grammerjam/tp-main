@@ -163,6 +163,8 @@ const validateInputs = () => {
 
   if (cardNameValue === "") {
     setError(inputName, "Can't be blank");
+  } else if (!cardNameValue.includes(" ")) {
+    setError(inputName, "Invalid name format");
   } else {
     setSuccess(inputName);
   }
