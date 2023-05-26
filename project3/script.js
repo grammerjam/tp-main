@@ -229,8 +229,14 @@ submitButton.addEventListener("click", function () {
 const confirmButton = document.getElementById("confirmButton");
 // const hiddenElement = document.getElementById("hiddenElement");
 // const myForm = document.getElementById("myForm");
+formReset = () => {
+  document.getElementById("myForm").reset();
+};
 
 confirmButton.addEventListener("click", function () {
   hiddenElement.classList.add("hidden");
   myForm.style.display = "block";
+  formReset();
 });
+
+// Reset Form after completion
