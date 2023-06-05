@@ -5,6 +5,7 @@ function App() {
   return (
     <div class={styles.App}>
       <header class={styles.header}>
+        <h1 class="text-green-500 mb-10">Hello</h1>
         <img src={logo} class={styles.logo} alt="logo" />
         <p>
           Edit <code>src/App.jsx</code> and save to reload.
