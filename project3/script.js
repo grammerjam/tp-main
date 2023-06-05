@@ -77,6 +77,7 @@ const isValidCardNumber = (cardNumber) => {
   const re = /^[0-9]+$/;
   return re.test(cardNumber);
 };
+
 // form validation
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -187,9 +188,7 @@ const validateInputs = () => {
   } else {
     setSuccess(inputYear);
   }
-  console.log(isValidAmexCard(cardNumberValue));
-  console.log(isValidVisaCard(cardNumberValue));
-  console.log(cardCvcValue);
+ 
   if (cardCvcValue === "") {
     setError(inputCvc, "Can't be blank");
   } else if (isValidVisaCard(cardNumberValue) && cardCvcValue.length === 3) {
