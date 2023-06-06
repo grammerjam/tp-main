@@ -16,10 +16,10 @@ module.exports = {
               "ff-space": '"Space Grotesk", "sans-serif"',
             },
             backgroundImage: {
-              "mobile-header": "url('./images/bg-main-mobile.png')",
-              "desktop-header": "url('./images/bg-main-desktop.png')",
-              "front-card": "url('./images/bg-card-front.png')",
-              "back-card": "url('./images/bg-card-back.png')",
+              "mobile-header": "url('/src/assets/bg-main-mobile.png')",
+              "desktop-header": "url('/src/assets/bg-main-desktop.png')",
+              "front-card": "url('/src/assets/bg-card-front.png')",
+              "back-card": "url('/src/assets/bg-card-back.png')",
             },
             screens: {
               dt: "800px",
