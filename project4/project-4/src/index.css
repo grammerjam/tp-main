@@ -3,3 +3,21 @@
 @tailwind utilities;
 
 
+@layer utilities {
+      .input-control.success input {
+    border-color: hsl(249, 99%, 64%);
+    }
+    
+
+    .input-control.error input {
+        border-color: hsl(0, 100%, 66%);
+    }
+  
+    .input-control .error {
+        color: hsl(0, 100%, 66%);
+        font-size: 8px;
+        /* height: 13px; */
+    }
+  }
+
+
