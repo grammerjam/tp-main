@@ -1,6 +1,15 @@
 
+import form from "./Form";
+import cardLogo from "../assets/card-logo.svg";
+import { createEffect } from "solid-js";
+
 
 export default function CardFront() {
+   
+createEffect(() => {
+  console.log(form().cardName);
+});
+
   return (
     <>
       <div class="dt:h-[12rem] dt:w-[20rem] dt:top-[8rem] dt:-right-28 rounded-md bg-front-card bg-right-top absolute h-[10rem] w-[18rem] top-28 max-dt:left-4 z-10">
@@ -9,7 +18,7 @@ export default function CardFront() {
           <div class="card-logo">
             <img
               class="card-image h-7"
-              src="../assets/card-logo.svg"
+              src={cardLogo}
               alt="Card Logo"
             />
           </div>
@@ -20,7 +29,7 @@ export default function CardFront() {
 
           <div class="flex justify-between max-w-[232px] text-[10px] pt-4 pl-2">
             <div class="card-holder">
-              <p class="card-name">JANE APPLESEED</p>
+              <p class="card-name">{form.cardName}</p>
             </div>
 
             <div class="">
