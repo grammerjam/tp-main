@@ -1,25 +1,11 @@
-import { createSignal, createEffect } from "solid-js";
+
 import completeImage from "../assets/icon-complete.svg";
 
-export default function Form() {
-  const [form, setForm] = createSignal({
-    cardName: "",
-    cardNumber: "",
-    cardMonth: "",
-    cardYear: "",
-    cardCvc: "",
-  });
 
-  const handleInput = (e) => {
-    let key = e.target.name;
-    setForm({ ...form(), [key]: e.target.value });
 
-  };
 
-  createEffect(() => {
-    console.log(form().cardName);
-  })
-
+export default function Form({ formData, handleFormData}) {
+ 
   return (
     <>
       <form
@@ -32,7 +18,7 @@ export default function Form() {
           {/* CARD NAME INPUT  */}
           <input
             onInput={(e) => {
-              handleInput(e);
+              handleFormData(e);
             }}
             class="input-name border rounded h-10 mt-1 pl-3 focus:outline-input-active invalid:input-error"
             id="name"
@@ -49,7 +35,7 @@ export default function Form() {
           {/* CARD NUMBER INPUT */}
           <input
             onInput={(e) => {
-               handleInput(e);
+              handleFormData(e);
             }}
             class="input-number border rounded h-10 mt-1 pl-3 focus:outline-input-active"
             id="card-number creditCardNumber"
@@ -76,7 +62,7 @@ export default function Form() {
             <div class="input-control">
               <input
                 onInput={(e) => {
-                   handleInput(e);
+                  handleFormData(e);
                 }}
                 class="input-month border rounded h-10 w-16 mr-3 pl-3 focus:outline-input-active  "
                 id="month"
@@ -91,7 +77,7 @@ export default function Form() {
             <div class="input-control">
               <input
                 onInput={(e) => {
-                  handleInput(e);
+                  handleFormData(e);
                 }}
                 class="input-year border rounded h-10 w-16 mr-3 pl-3 focus:outline-input-active"
                 id="year"
@@ -106,7 +92,7 @@ export default function Form() {
             <div class="input-control">
               <input
                 onInput={(e) => {
-                   handleInput(e);
+                  handleFormData(e);
                 }}
                 class="input-cvc border rounded h-10 w-full pl-3 focus:outline-input-active"
                 id="cvc"

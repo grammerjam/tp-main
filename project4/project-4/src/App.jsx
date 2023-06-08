@@ -1,9 +1,28 @@
+import { createSignal } from 'solid-js';
 
 import CardFront from './components/Card-Front';
 import CardBack from './components/Card-Back';
 import Form from './components/Form';
 
+
+
+
 function App() {
+
+  const [formData, setFormData] = createSignal({
+    cardName: "",
+    cardNumber: "",
+    cardMonth: "",
+    cardYear: "",
+    cardCvc: "",
+  });
+  
+  function handleFormData(e) {
+    let key = e.target.name;
+    setFormData({ ...formData(), [key]: e.target.value });
+  }
+
+  // console.log(formData());
   return (
     <>
       <nav class="text-center">
@@ -15,8 +34,12 @@ function App() {
         <header class="dt:h-[100vh] dt:w-1/3 h-[30vh] dt:bg-desktop-header relative dt:bg-cover bg-mobile-header">
 
           {/* FRONT AND BACK CARDS */}
-          <CardFront />
-          <CardBack />
+          <CardFront 
+            formData={formData}
+          />
+          <CardBack
+            formData={formData}
+          />
         </header>
         {/* *************END HEADER SECTION*************** */}
 
@@ -24,7 +47,10 @@ function App() {
         <section class="dt:w-2/3 dt:m-auto h-[60vh] font-ff-space text-sm font-medium tracking-widest">
 
           {/* FORM */}
-          <Form />
+          <Form 
+            formData={formData}
+            handleFormData={handleFormData}
+          />
 
         </section>
         {/* *************END FORM SECTION*************** */}
