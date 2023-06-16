@@ -3,7 +3,10 @@ import cardLogo from "../assets/card-logo.svg";
 
 
 export default function CardFront({ formData }) {
-
+    function cardNumberFormat() {
+    let cardNumber = formData().cardNumber;
+    
+    }
   return (
     <>
       <div class="dt:h-[12rem] dt:w-[20rem] dt:top-[8rem] dt:-right-28 rounded-md bg-front-card bg-right-top absolute h-[10rem] w-[18rem] top-28 max-dt:left-4 z-10">
@@ -18,7 +21,7 @@ export default function CardFront({ formData }) {
                 when={formData().cardNumber}
                 fallback={<p class="card-name">0000 0000 0000 0000</p>}
               >
-                {formData().cardNumber}
+                {formData().cardNumber.replace(/(\d{4})(?=\d)/g, "$1 ")}
               </Show>
             </p>
           </div>
@@ -28,7 +31,7 @@ export default function CardFront({ formData }) {
               <p class="card-name">
                 <Show
                   when={formData().cardName}
-                  fallback={<p class="card-name">Jane Doe</p>}
+                  fallback={<p class="card-name">Jane Appleseed</p>}
                 >
                   {formData().cardName}
                 </Show>

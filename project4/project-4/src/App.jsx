@@ -1,9 +1,8 @@
-import { createSignal } from 'solid-js';
+import { createSignal, createEffect } from 'solid-js';
 
 import CardFront from './components/Card-Front';
 import CardBack from './components/Card-Back';
 import Form from './components/Form';
-
 
 
 
@@ -22,7 +21,8 @@ function App() {
     setFormData({ ...formData(), [key]: e.target.value });
   }
 
-  // console.log(formData());
+  
+
   return (
     <>
       <nav class="text-center">
