@@ -33,21 +33,21 @@ export default function Form({ handleFormData, formData }) {
   }
   
 
- 
-  
-  
-  
   function handleSubmit(e) {
     
     e.preventDefault();
     blankErrors();
+    // CARD NAME VALIDATION 
     if(!formData().cardName.includes(" ") && formData().cardName !== "") {
-
       setErrors({...errors(), nameError: "Invalid format"})
+    } else if (formData().cardName.includes(" ")) {
+      setErrors({...errors(), nameError: ""})
     } else {
-      formData().cardName = "Success"
+      formData().cardName = "";
     }
 
+    
+    
   }
     
     
@@ -58,7 +58,6 @@ export default function Form({ handleFormData, formData }) {
       <form
         id="myForm"
         class="max-w-[300px] flex flex-col pt-[7rem] w-[90vw] m-auto"
-      
       >
         <div class="input-control max-w-[300px] flex flex-col w-[90vw] m-auto">
           <label for="name block">CARDHOLDER NAME</label>
@@ -67,7 +66,6 @@ export default function Form({ handleFormData, formData }) {
             onInput={(e) => {
               handleFormData(e);
             }}
-
             class="input-name border rounded h-10 mt-1 pl-3 focus:outline-input-active invalid:input-error"
             id="name"
             name="cardName"
@@ -92,7 +90,7 @@ export default function Form({ handleFormData, formData }) {
             id="card-number creditCardNumber"
             name="cardNumber"
             // oninput="formatCreditCardNumber(this)"
-            type="text"
+            type="number"
             placeholder="e.g. 1234 5678 9123 0000"
             maxlength="19"
           />
@@ -120,7 +118,7 @@ export default function Form({ handleFormData, formData }) {
                 class="input-month border rounded h-10 w-16 mr-3 pl-3 focus:outline-input-active  "
                 id="month"
                 name="cardMonth"
-                type="text"
+                type="number"
                 placeholder="MM"
                 maxlength="2"
               />
@@ -132,7 +130,6 @@ export default function Form({ handleFormData, formData }) {
             <div class="input-control">
               <input
                 onInput={(e) => {
-                  
                   handleFormData(e);
                 }}
                 class="input-year border rounded h-10 w-16 mr-3 pl-3 focus:outline-input-active "
@@ -156,7 +153,7 @@ export default function Form({ handleFormData, formData }) {
                 class="input-cvc border rounded h-10 w-full pl-3 focus:outline-input-active"
                 id="cvc"
                 name="cardCvc"
-                type="text"
+                type="number"
                 placeholder="e.g. 123"
                 maxlength="4"
               />
@@ -195,7 +192,6 @@ export default function Form({ handleFormData, formData }) {
           class="confirm-btn h-10 bg-dark-violet text-white mt-8 rounded-md tracking-wide"
           type="submit"
           id="confirmButton"
-          
         >
           Confirm
         </button>
