@@ -1,17 +1,62 @@
 
 import completeImage from "../assets/icon-complete.svg";
 
+import { createSignal, createEffect } from "solid-js";
 
 
+export default function Form({ handleFormData, formData }) {
 
-export default function Form({ formData, handleFormData}) {
+
+  const [errors, setErrors] = createSignal({
+    nameError: "",
+    numberError: "",
+    monthError: "",
+    yearError: "",
+    cvcError: "",
+  });
+  
+  function blankErrors() {
+    let allBlank = false;
+
+    for(let key in formData()) {
+    if(formData()[key] === "") {
+      allBlank = true
+    } else {
+      console.log("success")
+    }
+    }
+    if (allBlank = true)
+    for(let key in errors()) {
+      setErrors({ ...errors(), [key]: "Can't be blank" } )
+      console.log(errors())
+    } 
+  }
+  
+ 
+  
+  
+  
+  function handleSubmit(e) {
+    
+    e.preventDefault();
+    let allBlank = false;
+    if(!formData().cardName.includes(" ")) {
+      blankErrors()
+      setErrors({...errors(), nameError: "Invalid format"})
+      // console.log(errors().nameError)
+    } 
+
+  }
+    
+    
+  
  
   return (
     <>
       <form
         id="myForm"
         class="max-w-[300px] flex flex-col pt-[7rem] w-[90vw] m-auto"
-        action="javascript:validateInputs()"
+      
       >
         <div class="input-control max-w-[300px] flex flex-col w-[90vw] m-auto">
           <label for="name block">CARDHOLDER NAME</label>
@@ -20,13 +65,17 @@ export default function Form({ formData, handleFormData}) {
             onInput={(e) => {
               handleFormData(e);
             }}
+
             class="input-name border rounded h-10 mt-1 pl-3 focus:outline-input-active invalid:input-error"
             id="name"
             name="cardName"
             type="text"
             placeholder="e.g Jane Appleseed"
+            pattern="[A-Za-z]{3,}"
           />
-          <div class="error"></div>
+          <span class="error" name="nameError">
+            {errors().nameError}
+          </span>
         </div>
         <div class="input-control max-w-[300px] flex flex-col w-[90vw] m-auto">
           <label class="pt-5" for="card-number">
@@ -46,7 +95,9 @@ export default function Form({ formData, handleFormData}) {
             maxlength="19"
           />
 
-          <div class="error"></div>
+          <span class="error" name="nameError">
+            {errors().numberError}
+          </span>
         </div>
 
         {/* CARD EXPIRATION DATE  */}
@@ -71,22 +122,28 @@ export default function Form({ formData, handleFormData}) {
                 placeholder="MM"
                 maxlength="2"
               />
-              <div class="error"></div>
+              <span class="error" name="nameError">
+                {errors().monthError}
+              </span>
             </div>
             {/* YEAR INPUT  */}
             <div class="input-control">
               <input
                 onInput={(e) => {
+                  
                   handleFormData(e);
                 }}
-                class="input-year border rounded h-10 w-16 mr-3 pl-3 focus:outline-input-active"
+                class="input-year border rounded h-10 w-16 mr-3 pl-3 focus:outline-input-active "
                 id="year"
                 name="cardYear"
-                type="text"
+                type="number"
                 placeholder="YY"
                 maxlength="2"
+                pattern="[0-9]"
               />
-              <div class="error pl-1"></div>
+              <span class="error" name="nameError">
+                {errors().yearError}
+              </span>
             </div>
             {/*  CVC INPUT  */}
             <div class="input-control">
@@ -101,13 +158,18 @@ export default function Form({ formData, handleFormData}) {
                 placeholder="e.g. 123"
                 maxlength="4"
               />
-              <div class="error pl-1"></div>
+              <span class="error" name="nameError">
+                {errors().cvcError}
+              </span>
             </div>
           </div>
         </div>
 
         {/*  CONFIRM BUTTON  */}
         <button
+          onClick={(e) => {
+            handleSubmit(e);
+          }}
           class="confirm-btn h-10 min-w-[300px] bg-dark-violet text-white mt-8 rounded-md tracking-wide"
           type="submit"
           id="submitButton"
@@ -131,6 +193,7 @@ export default function Form({ formData, handleFormData}) {
           class="confirm-btn h-10 bg-dark-violet text-white mt-8 rounded-md tracking-wide"
           type="submit"
           id="confirmButton"
+          
         >
           Confirm
         </button>
