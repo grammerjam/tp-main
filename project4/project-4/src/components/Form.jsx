@@ -4,55 +4,71 @@ import completeImage from "../assets/icon-complete.svg";
 import { createSignal } from "solid-js";
 
 
-export default function Form({ handleFormData, formData }) {
-
-
+export default function Form({ handleFormData, formData, setFormData }) {
   const [errors, setErrors] = createSignal({
-    nameError: "",
-    numberError: "",
-    monthError: "",
-    yearError: "",
-    cvcError: "",
+    name: "",
+    number: "",
+    month: "",
+    year: "",
+    cvc: "",
   });
-  
-  function blankErrors() {
-    let allBlank = false;
 
-    for(let key in formData()) {
-    if(formData()[key] === "") {
-      allBlank = true
-    } else {
-      allBlank = false
+  function numberType(e) {
+    let input = e.target.value;
+    let key = e.target.name;
+    let letters = /[A-Za-z]/g;
+    if (isNaN(input)) {
+      setErrors({ ...errors(), [key]: "Not a number" });
+      e.target.value = "";
+    } else if (!input.match(letters)) {
+      setErrors({ ...errors(), [key]: "" });
     }
-    }
-    if (allBlank = true)
-    for(let key in errors()) {
-      setErrors({ ...errors(), [key]: "Can't be blank" } )
-      console.log(errors())
-    } 
   }
-  
+
+  function letterType(e) {
+    let input = e.target.value;
+    let key = e.target.name;
+    if (/[0-9]/.test(input)) {
+      setErrors({ ...errors(), [key]: "Invalid Character" });
+      e.target.value = "";
+    } else {
+      setErrors({ ...errors(), [key]: "" });
+    }
+  }
+
+
+  function blankErrors() {
+    for(let key in formData()) {
+      if (formData()[key] === "") {
+        setErrors({ ...errors(), [key]: "Can't be blank" });
+      } else {
+        // validateData();
+        console.log("no blank errors")
+      }
+    }
+  }
 
   function handleSubmit(e) {
-    
     e.preventDefault();
     blankErrors();
-    // CARD NAME VALIDATION 
-    if(!formData().cardName.includes(" ") && formData().cardName !== "") {
-      setErrors({...errors(), nameError: "Invalid format"})
-    } else if (formData().cardName.includes(" ")) {
-      setErrors({...errors(), nameError: ""})
-    } else {
-      formData().cardName = "";
+    // CARD NAME VALIDATION
+    if (!formData().name.trim().includes(" ") && formData().name !== "") {
+      setErrors({ ...errors(), name: "Invalid Name" });
+    } else if (formData().name.includes(" ")) {
+      setErrors({ ...errors(), name: "" });
     }
 
-    
-    
+    // CARD NUMBER VALIDATION
+    if (formData().number.length < 16 && formData().number !== "") {
+      setErrors({ ...errors(), number: "Invalid length" });
+    } else if (
+      formData().number.length > 16 &&
+      formData().number.length < 19
+    ) {
+      setErrors({ ...errors(), number: "" });
+    }
   }
-    
-    
-  
- 
+
   return (
     <>
       <form
@@ -65,16 +81,17 @@ export default function Form({ handleFormData, formData }) {
           <input
             onInput={(e) => {
               handleFormData(e);
+              letterType(e);
             }}
             class="input-name border rounded h-10 mt-1 pl-3 focus:outline-input-active invalid:input-error"
             id="name"
-            name="cardName"
+            name="name"
             type="text"
             placeholder="e.g Jane Appleseed"
             pattern="[A-Za-z]{3,}"
           />
           <span class="error" name="nameError">
-            {errors().nameError}
+            {errors().name}
           </span>
         </div>
         <div class="input-control max-w-[300px] flex flex-col w-[90vw] m-auto">
@@ -85,18 +102,19 @@ export default function Form({ handleFormData, formData }) {
           <input
             onInput={(e) => {
               handleFormData(e);
+              numberType(e);
             }}
             class="input-number border rounded h-10 mt-1 pl-3 focus:outline-input-active"
             id="card-number creditCardNumber"
-            name="cardNumber"
+            name="number"
             // oninput="formatCreditCardNumber(this)"
-            type="number"
+            type="text"
             placeholder="e.g. 1234 5678 9123 0000"
             maxlength="19"
           />
 
           <span class="error" name="nameError">
-            {errors().numberError}
+            {errors().number}
           </span>
         </div>
 
@@ -114,16 +132,17 @@ export default function Form({ handleFormData, formData }) {
               <input
                 onInput={(e) => {
                   handleFormData(e);
+                  numberType(e);
                 }}
                 class="input-month border rounded h-10 w-16 mr-3 pl-3 focus:outline-input-active  "
                 id="month"
-                name="cardMonth"
-                type="number"
+                name="month"
+                type="text"
                 placeholder="MM"
                 maxlength="2"
               />
-              <span class="error" name="nameError">
-                {errors().monthError}
+              <span class="error inline-block" name="nameError">
+                {errors().month}
               </span>
             </div>
             {/* YEAR INPUT  */}
@@ -131,17 +150,18 @@ export default function Form({ handleFormData, formData }) {
               <input
                 onInput={(e) => {
                   handleFormData(e);
+                  numberType(e);
                 }}
                 class="input-year border rounded h-10 w-16 mr-3 pl-3 focus:outline-input-active "
                 id="year"
-                name="cardYear"
-                type="number"
+                name="year"
+                type="text"
                 placeholder="YY"
                 maxlength="2"
                 pattern="[0-9]"
               />
               <span class="error" name="nameError">
-                {errors().yearError}
+                {errors().year}
               </span>
             </div>
             {/*  CVC INPUT  */}
@@ -149,16 +169,17 @@ export default function Form({ handleFormData, formData }) {
               <input
                 onInput={(e) => {
                   handleFormData(e);
+                  numberType(e);
                 }}
                 class="input-cvc border rounded h-10 w-full pl-3 focus:outline-input-active"
                 id="cvc"
-                name="cardCvc"
-                type="number"
+                name="cvc"
+                type="text"
                 placeholder="e.g. 123"
                 maxlength="4"
               />
               <span class="error" name="nameError">
-                {errors().cvcError}
+                {errors().cvc}
               </span>
             </div>
           </div>

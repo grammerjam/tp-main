@@ -9,11 +9,11 @@ import Form from './components/Form';
 function App() {
 
   const [formData, setFormData] = createSignal({
-    cardName: "",
-    cardNumber: "",
-    cardMonth: "",
-    cardYear: "",
-    cardCvc: "",
+    name: "",
+    number: "",
+    month: "",
+    year: "",
+    cvc: "",
   });
   
   function handleFormData(e) {
@@ -50,6 +50,7 @@ function App() {
           <Form 
             formData={formData}
             handleFormData={handleFormData}
+            setFormData={setFormData}
           />
 
         </section>
