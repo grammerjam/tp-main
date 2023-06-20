@@ -1,7 +1,7 @@
 
 import completeImage from "../assets/icon-complete.svg";
 
-import { createSignal, createEffect } from "solid-js";
+import { createSignal } from "solid-js";
 
 
 export default function Form({ handleFormData, formData }) {
@@ -22,7 +22,7 @@ export default function Form({ handleFormData, formData }) {
     if(formData()[key] === "") {
       allBlank = true
     } else {
-      console.log("success")
+      allBlank = false
     }
     }
     if (allBlank = true)
@@ -32,6 +32,7 @@ export default function Form({ handleFormData, formData }) {
     } 
   }
   
+
  
   
   
@@ -39,12 +40,13 @@ export default function Form({ handleFormData, formData }) {
   function handleSubmit(e) {
     
     e.preventDefault();
-    let allBlank = false;
-    if(!formData().cardName.includes(" ")) {
-      blankErrors()
+    blankErrors();
+    if(!formData().cardName.includes(" ") && formData().cardName !== "") {
+
       setErrors({...errors(), nameError: "Invalid format"})
-      // console.log(errors().nameError)
-    } 
+    } else {
+      formData().cardName = "Success"
+    }
 
   }
     
