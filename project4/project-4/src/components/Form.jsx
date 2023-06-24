@@ -1,6 +1,5 @@
 
 import completeImage from "../assets/icon-complete.svg";
-
 import { createSignal } from "solid-js";
 
 
@@ -47,6 +46,8 @@ export default function Form({ handleFormData, formData, setFormData }) {
       }
     }
   }
+
+  
 
   function handleSubmit(e) {
     e.preventDefault();
