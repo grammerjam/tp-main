@@ -19,6 +19,7 @@ function App() {
   function handleFormData(e) {
     let key = e.target.name;
     setFormData({ ...formData(), [key]: e.target.value });
+    console.log(formData().number)
   }
 
   

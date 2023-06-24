@@ -3,10 +3,9 @@ import cardLogo from "../assets/card-logo.svg";
 
 
 export default function CardFront({ formData }) {
-    function cardNumberFormat() {
-    let cardNumber = formData().cardNumber;
-    
-    }
+    // function cardNumberFormat() {
+    // let cardNumber = formData().number; 
+    // }
   return (
     <>
       <div class="dt:h-[12rem] dt:w-[20rem] dt:top-[8rem] dt:-right-28 rounded-md bg-front-card bg-right-top absolute h-[10rem] w-[18rem] top-28 max-dt:left-4 z-10">
@@ -18,10 +17,10 @@ export default function CardFront({ formData }) {
           <div class="dt:pt-16 font-normal tracking-[.13rem] text-xl pt-10 pl-2">
             <p class="card-number">
               <Show
-                when={formData().cardNumber}
+                when={formData().number}
                 fallback={<p class="card-name">0000 0000 0000 0000</p>}
               >
-                {formData().cardNumber.replace(/(\d{4})(?=\d)/g, "$1 ")}
+                {formData().number.replace(/(\d{4})(?=\d)/g, "$1 ")}
               </Show>
             </p>
           </div>
@@ -30,10 +29,10 @@ export default function CardFront({ formData }) {
             <div class="card-holder">
               <p class="card-name">
                 <Show
-                  when={formData().cardName}
+                  when={formData().name}
                   fallback={<p class="card-name">Jane Appleseed</p>}
-                >
-                  {formData().cardName}
+                  >
+                  {formData().name}
                 </Show>
               </p>
             </div>
@@ -41,10 +40,10 @@ export default function CardFront({ formData }) {
             <div class="">
               <p class="card-date">
                 <Show
-                  when={formData().cardMonth && formData().cardYear}
+                  when={formData().month && formData().year}
                   fallback={<p class="card-name">00/00</p>}
                 >
-                  {formData().cardMonth}/{formData().cardYear} 
+                  {formData().month}/{formData().year} 
                 </Show>
               </p>
             </div>
