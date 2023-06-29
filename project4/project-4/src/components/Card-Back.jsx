@@ -9,10 +9,10 @@ export default function CardBack({ formData }) {
           <div class="card-cvc dt:top-[85px] dt:left-[260px] text-white text-xs absolute top-[70px] left-[238px]">
             <p class="card-cvc">
               <Show
-                when={formData().cardCvc}
+                when={formData().cvc}
                 fallback={<p class="card-name">000</p>}
               >
-                {formData().cardCvc}
+                {formData().cvc}
               </Show>
             </p>
           </div>
