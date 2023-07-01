@@ -1,6 +1,5 @@
 
 import completeImage from "../assets/icon-complete.svg";
-
 import { createSignal } from "solid-js";
 
 
@@ -12,6 +11,17 @@ export default function Form({ handleFormData, formData, setFormData }) {
     year: "",
     cvc: "",
   });
+
+  
+  function cardInputLength() {
+    let cardLength = 19;
+    if (formData().number.startsWith("37")) {
+      cardLength = 15;
+    } else {
+      cardLength = 16;
+    }
+    return cardLength;
+  } 
 
   function numberType(e) {
     let input = e.target.value;
@@ -47,6 +57,8 @@ export default function Form({ handleFormData, formData, setFormData }) {
       }
     }
   }
+
+  
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -110,7 +122,7 @@ export default function Form({ handleFormData, formData, setFormData }) {
             // oninput="formatCreditCardNumber(this)"
             type="text"
             placeholder="e.g. 1234 5678 9123 0000"
-            maxlength="19"
+            maxlength={cardInputLength()}
           />
 
           <span class="error" name="nameError">
