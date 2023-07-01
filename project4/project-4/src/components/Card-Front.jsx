@@ -4,6 +4,8 @@ import amexLogo from "../assets/amex.png";
 
 export default function CardFront({ formData }) {
   let cardLogo = defaultLogo;
+  let cardNumber = "0000 0000 0000 0000";
+
   function cardLogoImage() {
     if (formData().number.startsWith("4")) {
       cardLogo = visaLogo;
@@ -13,6 +15,19 @@ export default function CardFront({ formData }) {
       cardLogo = defaultLogo;
     }
     return cardLogo;
+  }
+
+  function cardNumberDisplay() {
+    if (formData().number.startsWith("37")) {
+      cardNumber = formData().number.replace(
+        /^(\d{4})(\d{6})(\d{5})$/,
+        "$1 $2 $3"
+      );
+    } else {
+      cardNumber = formData().number.replace(/(\d{4})(?=\d)/g, "$1 ");
+    } 
+    return cardNumber;
+
   }
 
   return (
@@ -25,12 +40,7 @@ export default function CardFront({ formData }) {
 
           <div class="dt:pt-16 font-normal tracking-[.13rem] text-xl pt-10 pl-2">
             <p class="card-number">
-              <Show
-                when={formData().number}
-                fallback={<p class="card-name">0000 0000 0000 0000</p>}
-              >
-                {formData().number.replace(/(\d{4})(?=\d)/g, "$1 ")}
-              </Show>
+              {cardNumberDisplay()}
             </p>
           </div>
 

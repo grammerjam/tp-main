@@ -12,6 +12,17 @@ export default function Form({ handleFormData, formData, setFormData }) {
     cvc: "",
   });
 
+  
+  function cardInputLength() {
+    let cardLength = 19;
+    if (formData().number.startsWith("37")) {
+      cardLength = 15;
+    } else {
+      cardLength = 16;
+    }
+    return cardLength;
+  } 
+
   function numberType(e) {
     let input = e.target.value;
     let key = e.target.name;
@@ -111,7 +122,7 @@ export default function Form({ handleFormData, formData, setFormData }) {
             // oninput="formatCreditCardNumber(this)"
             type="text"
             placeholder="e.g. 1234 5678 9123 0000"
-            maxlength="19"
+            maxlength={cardInputLength()}
           />
 
           <span class="error" name="nameError">
